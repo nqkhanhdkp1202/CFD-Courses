@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react';
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,21 +9,30 @@ import Navigator from './Navigator';
 
 export default function Header() {
 
-    const { isOpenLoginModal, setisOpenLoginModal, isOpenSignupModal, setisOpenSignupModal } = usePage()
-    const { user, setUser } = useContext(MainContext)
+    const { isOpenLoginModal,
+        setisOpenLoginModal,
+        isOpenRegister,
+        setIsOpenRegister,
+        user,
+        setUser } = usePage()
+    const navigate = useNavigate()
     function handleLogin(e) {
-        e.preventDefault();
-        setisOpenLoginModal(true);
+        e.preventDefault()
+        setisOpenLoginModal(true)
+
     }
 
-    function handleSignup(e) {
-        e.preventDefault();
-        setisOpenSignupModal(true);
+    function handleRegister(e) {
+        e.preventDefault()
+        setIsOpenRegister(true)
     }
 
     function handleLogout(e) {
-        e.preventDefault();
-        setUser({ status: false })
+        e.preventDefault()
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        setUser(null)
+        navigate('/')
     }
 
     return (
@@ -44,13 +53,13 @@ export default function Header() {
                     </Link>
                     <div className="right">
                         {
-                            user.status ? (
+                            user ? (
                                 <div className="have-login">
                                     <div className="account">
                                         <a href="#" className="info">
-                                            <div className="name">Trần Lê Trọng Nghĩa</div>
+                                            <div className="name">{user.name}</div>
                                             <div className="avatar">
-                                                <img src="/img/avt.png" alt="" />
+                                                <img src={user.avatar} alt="" />
                                             </div>
                                         </a>
                                     </div>
@@ -65,7 +74,7 @@ export default function Header() {
                             ) : (
                                 <div className="not-login bg-none" >
                                     <a href="#" onClick={handleLogin} className="btn-register">Đăng nhập</a>
-                                    <a href="#" onClick={handleSignup} className="btn main btn-open-login">Đăng ký</a>
+                                    <a href="#" onClick={handleRegister} className="btn main btn-open-login">Đăng ký</a>
                                 </div>
                             )
                         }

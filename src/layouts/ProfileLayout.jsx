@@ -7,19 +7,21 @@ import {
     PROFILE_PATH_PAYMENT,
     PROFILE_PATH_PROJECT
 } from '../config/path'
+import { usePage } from '../hooks/usePage'
 
 
 export default function ProfileLayout() {
+    const { user } = usePage()
     return (
         <main className="profile" id="main">
             <section>
                 <div className="top-info">
                     <div className="avatar">
                         {/* <span class="text">H</span> */}
-                        <img src="/img/avatar-lg.png" alt="" />
+                        <img src={user.avatar} alt="" />
                         <div className="camera" />
                     </div>
-                    <div className="name">trần nghĩa</div>
+                    <div className="name">{user.name}</div>
                     <p className="des">Thành viên của team CFD1-OFFLINE</p>
                 </div>
                 <div className="container">

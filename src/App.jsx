@@ -31,6 +31,7 @@ import CourseDetail from './pages/[slug]'
 import MainProvider from './context/MainContext'
 import router from './router'
 import LoginModal from './components/LoginModal'
+import CourseProvider from './hooks/useCourse'
 
 function App() {
 
@@ -38,7 +39,9 @@ function App() {
   return (
     <>
       <MainProvider>
-        {element}
+        <CourseProvider>
+          {element}
+        </CourseProvider>
       </MainProvider>
     </>
     // <MainProvider>

@@ -7,7 +7,8 @@ import userServices from '../services/userServices'
 function LoginModal() {
     const [isFetching, setIsFetching] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-    const { isOpenLoginModal, setisOpenLoginModal, setUser } = usePage()
+    const { isOpenLoginModal,
+        setisOpenLoginModal, user, setUser } = usePage()
     const [form, setForm] = useState({})
 
     const onSubmit = async () => {
@@ -20,6 +21,7 @@ function LoginModal() {
                 const user = await userServices.getInfo()
                 if (user.data) {
                     localStorage.setItem('user', JSON.stringify(user.data))
+                    setUser(user.data)
                     setisOpenLoginModal(false)
                 }
             }
@@ -40,9 +42,9 @@ function LoginModal() {
                     <h2 className="title">Đăng nhập</h2>
                     <input onChange={(e) => form.username = e.currentTarget.value} type="text" placeholder="Email / Số điện thoại" />
                     <input onChange={(e) => form.password = e.currentTarget.value} type="password" placeholder="Mật khẩu" />
-                    {/* {
+                    {
                         errorMessage && <p className='error-text' style={{ color: 'red' }}>{errorMessage}</p>
-                    } */}
+                    }
                     <div className="remember">
                         <label className="btn-remember">
                             <div>
@@ -53,7 +55,7 @@ function LoginModal() {
                         <a href="#" className="forget">Quên mật khẩu?</a>
                     </div>
                     <div className="btn rect main btn-login" onClick={onSubmit}>đăng nhập</div>
-                    <div className="text-register" style={{}}>
+                    <div className="text-register">
                         <strong>hoặc đăng ký bằng</strong>
                     </div>
                     <div>

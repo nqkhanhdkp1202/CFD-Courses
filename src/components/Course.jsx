@@ -1,10 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { COURSE_DETAIL } from '../config/path'
+import { useCourse } from '../hooks/useCourse';
 
 export default function Course({ title, short_description, thumbnailUrl, teacher, course_status }) {
+
     return (
         <div className="col-md-4 course">
             <div className="wrap">
-                <a className="cover" href="#">
+                <Link to="" className="cover">
                     <img src={thumbnailUrl} />
                     {course_status == 'dang-dien-ra' ? <span className="badge b2">Đang diễn ra</span> :
                         course_status == 'da-ket-thuc' ? <span className="badge b1">Đã kết thúc</span> :
@@ -23,11 +27,11 @@ export default function Course({ title, short_description, thumbnailUrl, teacher
                             <img src="/img/icon-viewmore.svg" alt="" />
                         </div>
                     </div>
-                </a>
+                </Link>
                 <div className="info">
-                    <a className="name" href="#">
+                    <Link to={COURSE_DETAIL} className="name" >
                         {title}
-                    </a>
+                    </Link>
                     <p className="des">
                         {short_description}
                     </p>

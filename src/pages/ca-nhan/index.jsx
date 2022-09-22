@@ -1,28 +1,53 @@
 import React from 'react'
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { usePage } from '../../hooks/usePage'
+import userServices from '../../services/userServices'
 import Coin from './coin'
 import Project from './du-an'
 import MyCourses from './khoa-hoc'
 import Payment from './lich-su-thanh-toan'
 
 export default function Profile() {
-    const [login, setLogin] = useState(true);
+    const { user } = usePage()
+    const [form, setForm] = useState({})
+    const [isFetching, setIsFetching] = useState(false)
+    const [error, setErrorMessage] = useState('')
+
+    const onChangeInfo = async () => {
+        try {
+            setIsFetching(true)
+            const result = userServices.updateInfo(form)
+            if (result.data) {
+                const user = await userServices.getInfo()
+                if (user.data) {
+                    localStorage.setItem('user', JSON.stringify(user.data))
+                    setUser(user.data)
+                }
+            }
+        }
+        catch (err) {
+            setErrorMessage(err)
+        }
+        finally {
+            setIsFetching(false)
+        }
+    }
 
     return (
         <div className="tab1">
-            {!login && <Navigate to='/' />}
+            {!user && <Navigate to='/' />}
             <label>
                 <p>Họ và tên<span>*</span></p>
-                <input type="text" placeholder="Nguyễn Văn A" />
+                <input type="text" placeholder={user.name} onChange={(e) => form.name = e.currentTarget.value} />
             </label>
             <label>
                 <p>Số điện thoại<span>*</span></p>
-                <input type="text" placeholder="0949******" />
+                <input type="text" placeholder={user.phone} onChange={(e) => form.phone = e.currentTarget.value} />
             </label>
             <label>
                 <p>Email<span>*</span></p>
-                <input defaultValue="vuong.dang@dna.vn" disabled type="text" />
+                <input defaultValue={user.username} disabled type="text" />
             </label>
             <label>
                 <p>Facebook<span>*</span></p>
@@ -32,7 +57,7 @@ export default function Profile() {
                 <p>Skype<span>*</span></p>
                 <input type="text" placeholder="Skype url" />
             </label>
-            <div className="btn main rect">LƯU LẠI</div>
+            <div className="btn main rect" onClick={onChangeInfo}>LƯU LẠI</div>
         </div>
     )
 }

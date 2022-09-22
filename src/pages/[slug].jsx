@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Accordion from '../components/Accordion'
+import courseService from '../services/courseServices'
 
 export default function CourseDetail() {
-    const { slug } = useParams()
-    // API
-    console.log(slug)
+
+    const [course, setCourse] = useState({})
+    const [accordion, setAccordion] = useState([])
+
+    useEffect(() => {
+        courseService.getDetail(17)
+            .then(res => setCourse(res.data))
+    }, [])
+
+
+
 
     return (
         <main className="course-detail" id="main">
-            <section className="banner style2">
+            <section className="banner style2" style={{ background: `${course.template_color_banner}` }}>
                 <div className="container">
                     <div className="info">
                         <h1>Thực Chiến
                             front-end căn bản</h1>
                         <div className="row">
-                            <div className="date"><strong>Khai giảng:</strong> 12/10/2020</div>
-                            <div className="time"><strong>Thời lượng:</strong> 18 buổi</div>
+                            <div className="date"><strong>Khai giảng:</strong> {course.opening_time}</div>
+                            <div className="time"><strong>Thời lượng:</strong> {course.count_video} buổi</div>
                         </div>
                         <div className="btn white round" >đăng ký</div>
                     </div>
@@ -33,74 +43,15 @@ export default function CourseDetail() {
             </section >
             <section className="section-2">
                 <div className="container">
-                    <p className="des">Many Laravel apps don’t warrant the complexity of a full front-end framework like Vue or
-                        React. In this series, we’ll walk through a handful of simple ways to add dynamic functionality to
-                        your apps.</p>
+                    <p className="des">{course.long_description}</p>
                     <h2 className="title">giới thiệu về khóa học</h2>
                     <div className="cover">
                         <img src="/img/course-detail-img.png" alt="" />
                     </div>
                     <h3 className="title">nội dung khóa học</h3>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 1</div>
-                            <h3>Giới thiệu HTML, SEO, BEM.</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 2</div>
-                            <h3>CSS, CSS3, Flexbox, Grid</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 3</div>
-                            <h3>Media Queries</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 4</div>
-                            <h3>Boostrap 4</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 5</div>
-                            <h3>Thực hành dự án website Landing Page</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
-                    <div className="accordion">
-                        <div className="accordion__title">
-                            <div className="date">Ngày 6</div>
-                            <h3>Cài đặt Grunt và cấu trúc thư mục dự án</h3>
-                        </div>
-                        <div className="content">
-                            I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                            some tangible benefits over alternatives like VueJS for simple page interactions.
-                        </div>
-                    </div>
+                    {/* {
+                        course.content.map((e) => <Accordion index={index} content={content} title={title} />)
+                    } */}
                     <h3 className="title">yêu cầu cần có</h3>
                     <div className="row row-check">
                         <div className="col-md-6">Đã từng học qua HTML, CSS</div>
