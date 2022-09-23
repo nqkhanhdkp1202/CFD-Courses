@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { COURSE_DETAIL } from '../config/path'
-import { useCourse } from '../hooks/useCourse';
+import { generatePath, Link } from 'react-router-dom'
+import { COURSE_DETAIL } from '../../config/path'
 
-export default function Course({ title, short_description, thumbnailUrl, teacher, course_status }) {
+export default function Course({ id, title, short_description, thumbnailUrl, teacher, course_status, slug }) {
+
+    const path = generatePath(COURSE_DETAIL, { slug, id })
 
     return (
         <div className="col-md-4 course">
             <div className="wrap">
-                <Link to="" className="cover">
+                <Link to={path} className="cover">
                     <img src={thumbnailUrl} />
                     {course_status == 'dang-dien-ra' ? <span className="badge b2">Đang diễn ra</span> :
                         course_status == 'da-ket-thuc' ? <span className="badge b1">Đã kết thúc</span> :
@@ -29,7 +30,7 @@ export default function Course({ title, short_description, thumbnailUrl, teacher
                     </div>
                 </Link>
                 <div className="info">
-                    <Link to={COURSE_DETAIL} className="name" >
+                    <Link to={path} className="name" >
                         {title}
                     </Link>
                     <p className="des">

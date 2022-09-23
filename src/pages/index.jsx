@@ -1,23 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import Course from '../components/Course'
-import { useCourse } from '../hooks/useCourse';
+import Course from '../components/course/Course'
+import useQuery from '../hooks/useQuery';
 import courseService from '../services/courseServices';
 
 export default function Home() {
 
-    const [course, setCourse] = useState([]);
-
-
-    useEffect(() => {
-        // fetch(`http://cfd-reactjs.herokuapp.com/elearning/v4/courses`)
-        //     .then(res => res.json())
-        //     .then(res => setCourse(res.data));
-        courseService.getList()
-            .then(res => setCourse(res.data))
-    }, [])
-
-    const { id, setID } = useCourse();
+    const { data: courses, loading: loadingCourses, error: errorCourses } = useQuery(() => courseService.getList(), [])
 
     return (
         <main className="homepage" id="main">
@@ -46,7 +35,7 @@ export default function Home() {
                     </div>
                     <div className="list row">
                         {
-                            course.slice(0, 9).map((e) => <Course onClick={(e) => { setID(e.id); console.log(id) }} key={e.id} {...e} />)
+                            courses.slice(0, 9).map((e) => <Course key={e.id} {...e} />)
                         }
                     </div>
                 </div>

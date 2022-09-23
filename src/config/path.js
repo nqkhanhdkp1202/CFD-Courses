@@ -5,4 +5,4 @@ export const PROFILE_PATH_PAYMENT = '/ca-nhan/lich-su-thanh-toan'
 export const PROFILE_PATH_PROJECT = '/ca-nhan/du-an'
 
 
-export const COURSE_DETAIL = "/khoa-hoc/:slug"
+export const COURSE_DETAIL = "/khoa-hoc/:slug-p:id"

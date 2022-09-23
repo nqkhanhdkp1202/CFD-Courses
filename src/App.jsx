@@ -19,19 +19,10 @@ import Project from './pages/ca-nhan/du-an'
 import Payment from './pages/ca-nhan/lich-su-thanh-toan'
 import MyCourses from './pages/ca-nhan/khoa-hoc'
 import Coin from './pages/ca-nhan/coin'
-import {
-  PROFILE_PATH,
-  PROFILE_PATH_COURSES,
-  PROFILE_PATH_COIN,
-  PROFILE_PATH_PAYMENT,
-  PROFILE_PATH_PROJECT,
-  COURSE_DETAIL
-} from './config/path'
 import CourseDetail from './pages/[slug]'
 import MainProvider from './context/MainContext'
 import router from './router'
 import LoginModal from './components/LoginModal'
-import CourseProvider from './hooks/useCourse'
 
 function App() {
 
@@ -39,9 +30,7 @@ function App() {
   return (
     <>
       <MainProvider>
-        <CourseProvider>
-          {element}
-        </CourseProvider>
+        {element}
       </MainProvider>
     </>
     // <MainProvider>
