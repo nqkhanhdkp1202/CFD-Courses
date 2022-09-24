@@ -11,7 +11,7 @@ function LoginModal() {
         setisOpenLoginModal, user, setUser } = usePage()
     const [form, setForm] = useState({})
 
-    const onSubmit = async () => {
+    const onLogin = async () => {
         try {
             setIsFetching(true)
             const result = await authServices.login(form)
@@ -54,7 +54,7 @@ function LoginModal() {
                         </label>
                         <a href="#" className="forget">Quên mật khẩu?</a>
                     </div>
-                    <div className="btn rect main btn-login" onClick={onSubmit}>đăng nhập</div>
+                    <div className="btn rect main btn-login" onClick={onLogin}>đăng nhập</div>
                     <div className="text-register">
                         <strong>hoặc đăng ký bằng</strong>
                     </div>

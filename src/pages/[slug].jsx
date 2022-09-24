@@ -34,7 +34,7 @@ export default function CourseDetail() {
                             <div className="date"><strong>Khai giảng:</strong> {course.opening_time}</div>
                             <div className="time"><strong>Thời lượng:</strong>{course.count_video} buổi</div>
                         </div>
-                        <div className="btn white round" >đăng ký</div>
+                        <div className="btn white round" style={{ background: course.template_color_btn && `${course.template_color_btn}` }} >đăng ký</div>
                     </div>
                 </div>
                 <div className="bottom">

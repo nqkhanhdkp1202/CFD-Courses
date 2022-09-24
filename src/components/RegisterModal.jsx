@@ -14,7 +14,7 @@ export default function RegisterModal() {
     const [form, setForm] = useState({})
 
 
-    const onSubmit = async () => {
+    const onRegister = async () => {
         try {
             setIsFetching(true)
             const result = await authServices.register(form)
@@ -47,7 +47,7 @@ export default function RegisterModal() {
                     {
                         errorMessage && <p className='error-text' style={{ color: 'red' }}>{errorMessage}</p>
                     }
-                    <div className="btn main rect" onClick={onSubmit}>ĐĂNG KÝ</div>
+                    <div className="btn main rect" onClick={onRegister}>ĐĂNG KÝ</div>
                 </div>
                 <p className="policy">
                     Bằng việc đăng kí, bạn đã đồng ý <a href="#">Điều khoản bảo mật</a> của CFD
