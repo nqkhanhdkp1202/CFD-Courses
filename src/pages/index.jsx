@@ -247,8 +247,8 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="dots" />
-                            <div className="btn_ctr prev" style={{ display: 'flex', alignItems: 'center' }}></div>
-                            <div className="btn_ctr next" style={{ display: 'flex', alignItems: 'center' }}></div>
+                            <div className="btn_ctr prev"></div>
+                            <div className="btn_ctr next"></div>
                         </div>
                     </div>
                 </div>

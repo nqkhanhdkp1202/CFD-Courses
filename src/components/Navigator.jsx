@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Navigator() {
     return (
@@ -10,7 +11,7 @@ export default function Navigator() {
                         <a href="#">Đăng ký</a>
                     </li>
                     <li className="active">
-                        <a href="#">Trang chủ</a>
+                        <Link to='/' href="#">Trang chủ</Link>
                     </li>
                     <li>
                         <a href="#">CFD Team</a>

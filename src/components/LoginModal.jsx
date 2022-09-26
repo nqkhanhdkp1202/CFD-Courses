@@ -8,13 +8,15 @@ function LoginModal() {
     const [isFetching, setIsFetching] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const { isOpenLoginModal,
-        setisOpenLoginModal, user, setUser } = usePage()
-    const [form, setForm] = useState({})
+        setisOpenLoginModal, isOpenRegister,
+        setIsOpenRegister, user, setUser } = usePage()
+    const [formLogin, setFormLogin] = useState({})
+    const [formRegister, setFormRegister] = useState({})
 
     const onLogin = async () => {
         try {
             setIsFetching(true)
-            const result = await authServices.login(form)
+            const result = await authServices.login(formLogin)
             if (result.data) {
                 localStorage.setItem('token', JSON.stringify(result.data))
 
@@ -34,42 +36,85 @@ function LoginModal() {
         }
     }
 
+    const onRegister = async () => {
+        try {
+            setIsFetching(true)
+            const result = await authServices.register(formRegister)
+            setIsOpenRegister(false)
+            setisOpenLoginModal(true)
+        }
+        catch (err) {
+            setErrorMessage(err)
+        }
+        finally {
+            setIsFetching(false)
+        }
+    }
+
     return ReactDOM.createPortal(
-        <div className="popup-form popup-login" style={{ display: isOpenLoginModal ? 'flex' : 'none' }}>
-            <div className="wrap">
-                {/* login-form */}
-                <div className="ct_login" style={{ display: 'block' }}>
-                    <h2 className="title">Đăng nhập</h2>
-                    <input onChange={(e) => form.username = e.currentTarget.value} type="text" placeholder="Email / Số điện thoại" />
-                    <input onChange={(e) => form.password = e.currentTarget.value} type="password" placeholder="Mật khẩu" />
-                    {
-                        errorMessage && <p className='error-text' style={{ color: 'red' }}>{errorMessage}</p>
-                    }
-                    <div className="remember">
-                        <label className="btn-remember">
-                            <div>
-                                <input type="checkbox" />
+        <div className="popup-form popup-login" style={{ display: isOpenLoginModal || isOpenRegister ? 'flex' : 'none' }}>
+            {
+                isOpenLoginModal ? <div className="wrap">
+                    {/* login-form */}
+                    <div className="ct_login" >
+                        <h2 className="title">Đăng nhập</h2>
+                        <input onChange={(e) => formLogin.username = e.currentTarget.value} type="text" placeholder="Email / Số điện thoại" />
+                        <input onChange={(e) => formLogin.password = e.currentTarget.value} type="password" placeholder="Mật khẩu" />
+                        {
+                            errorMessage && <p className='error-text' style={{ color: 'red' }}>{errorMessage}</p>
+                        }
+                        <div className="remember">
+                            <label className="btn-remember">
+                                <div>
+                                    <input type="checkbox" />
+                                </div>
+                                <p>Nhớ mật khẩu</p>
+                            </label>
+                            <a href="#" className="forget">Quên mật khẩu?</a>
+                        </div>
+                        <div className="btn rect main btn-login" onClick={onLogin}>đăng nhập</div>
+                        <div className="text-register">
+                            <strong>hoặc đăng ký bằng</strong>
+                        </div>
+                        <div>
+                            <div className="btn btn-icon rect white btn-google">
+                                <img src="img/google.svg" alt="" />
+                                Google
                             </div>
-                            <p>Nhớ mật khẩu</p>
-                        </label>
-                        <a href="#" className="forget">Quên mật khẩu?</a>
-                    </div>
-                    <div className="btn rect main btn-login" onClick={onLogin}>đăng nhập</div>
-                    <div className="text-register">
-                        <strong>hoặc đăng ký bằng</strong>
-                    </div>
-                    <div>
-                        <div className="btn btn-icon rect white btn-google">
-                            <img src="img/google.svg" alt="" />
-                            Google
+                        </div>
+                        <div onClick={() => { setisOpenLoginModal(false) }} className="close">
+                            <img src="img/close-icon.png" alt="" />
                         </div>
                     </div>
-                    <div onClick={() => { setisOpenLoginModal(false) }} className="close">
+                    {/* email form */}
+                </div> : isOpenRegister ? <div className="wrap">
+                    <h2 className="title">Đăng ký</h2>
+                    <div className="tab1">
+                        <label>
+                            <p>Email<span>*</span></p>
+                            <input onChange={(e) => formRegister.username = e.currentTarget.value} type="text" placeholder="Email" />
+                        </label>
+                        <label>
+                            <p>Mật khẩu<span>*</span></p>
+                            <input onChange={(e) => formRegister.password = e.currentTarget.value} type="password" placeholder="Mật khẩu" />
+                        </label>
+                        <label>
+                            <p>Họ và tên<span>*</span></p>
+                            <input onChange={(e) => formRegister.name = e.currentTarget.value} type="text" placeholder="Họ và tên" />
+                        </label>
+                        {
+                            errorMessage && <p className='error-text' style={{ color: 'red' }}>{errorMessage}</p>
+                        }
+                        <div className="btn main rect" onClick={onRegister}>ĐĂNG KÝ</div>
+                    </div>
+                    <p className="policy">
+                        Bằng việc đăng kí, bạn đã đồng ý <a href="#">Điều khoản bảo mật</a> của CFD
+                    </p>
+                    <div onClick={() => setIsOpenRegister(false)} className="close">
                         <img src="img/close-icon.png" alt="" />
                     </div>
-                </div>
-                {/* email form */}
-            </div>
+                </div> : <></>
+            }
         </div>, document.body
     )
 }

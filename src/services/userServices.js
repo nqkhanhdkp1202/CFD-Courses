@@ -6,6 +6,9 @@ const userServices = {
     },
     updateInfo(data) {
         return api.post('/user/update', data)
+    },
+    getMyCourse() {
+        return api.get('/elearning/v4/profile/course')
     }
 }
 

@@ -20,11 +20,14 @@ import {
     PROFILE_PATH_COIN,
     PROFILE_PATH_PAYMENT,
     PROFILE_PATH_PROJECT,
-    COURSE_DETAIL
+    COURSE_DETAIL,
+    REGISTER_PATH
 } from './config/path'
 import Home from './pages';
 import Contact from './pages/hop-tac';
 import CourseDetail from './pages/[slug]';
+import Register from './pages/dang-ky/[slug]';
+import { lazy } from 'react';
 
 const router = [
     {
@@ -45,6 +48,9 @@ const router = [
             },
             {
                 path: '*', element: <Page404NotFound />
+            },
+            {
+                path: REGISTER_PATH, element: <Register />
             },
             {
                 path: '/ca-nhan',

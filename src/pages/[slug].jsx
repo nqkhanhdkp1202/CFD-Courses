@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { generatePath, Link, useParams } from 'react-router-dom'
 import Accordion from '../components/course/Accordion';
 import Course from '../components/course/Course';
 import Ticked from '../components/course/Ticked';
@@ -7,10 +7,13 @@ import Page404 from '../components/Page404';
 import useQuery from '../hooks/useQuery'
 import useScrollTop from '../hooks/useScrollTop';
 import courseService from '../services/courseServices'
+import moment from 'moment/moment';
+import { moneyFormat, timeFormat } from '../config/format';
+import { REGISTER_PATH } from '../config/path';
 
 export default function CourseDetail() {
 
-    const { id } = useParams();
+    const { slug, id } = useParams();
     const { data: courses } = useQuery(() => courseService.getList(), [])
     const { data: course, loading: loadingCourse, error: errorCourse } = useQuery(() => courseService.getDetail(id), [id])
 
@@ -20,9 +23,9 @@ export default function CourseDetail() {
     if (course === null) {
         return <Page404 />
     }
-
-    console.log(course.content)
     // useScrollTop([id])
+    const registerPath = generatePath(REGISTER_PATH, { slug, id })
+
 
     return (
         <main className="course-detail" id="main">
@@ -31,10 +34,10 @@ export default function CourseDetail() {
                     <div className="info">
                         <h1>{course.title}</h1>
                         <div className="row">
-                            <div className="date"><strong>Khai giảng:</strong> {course.opening_time}</div>
+                            <div className="date"><strong>Khai giảng:</strong>{timeFormat(course.opening_time)}</div>
                             <div className="time"><strong>Thời lượng:</strong>{course.count_video} buổi</div>
                         </div>
-                        <div className="btn white round" style={{ background: course.template_color_btn && `${course.template_color_btn}` }} >đăng ký</div>
+                        <Link to={registerPath} className="btn white round" style={{ background: course.template_color_btn && `${course.template_color_btn}` }} >đăng ký</Link>
                     </div>
                 </div>
                 <div className="bottom">
@@ -44,7 +47,7 @@ export default function CourseDetail() {
                                 <img src="/img/play-icon-white.png" alt="" />
                             </div> <span>giới thiệu</span>
                         </div>
-                        <div className="money">4.000.000 VND</div>
+                        <div className="money">{moneyFormat(course.money)} VNĐ</div>
                     </div>
                 </div>
             </section >
@@ -93,7 +96,7 @@ export default function CourseDetail() {
                                 <p className="intro">
                                     {course.teacher.description}
                                 </p>
-                                <p><strong>Website:</strong> <a href={course.teacher.website}>{course.teacher.website}</a></p>
+                                <p><strong>Website:</strong> <a href={course.teacher.website} target="_blank">{course.teacher.website}</a></p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +104,7 @@ export default function CourseDetail() {
                         <div className="user">
                             <img src="/img/user-group-icon.png" alt="" /> 12 bạn đã đăng ký
                         </div>
-                        <div className="btn main btn-register round">đăng ký</div>
+                        <Link to={registerPath} className="btn main btn-register round">đăng ký</Link>
                         <div className="btn-share btn overlay round btn-icon">
                             <img src="/img/facebook.svg" alt="" />
                         </div>
