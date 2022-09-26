@@ -26,9 +26,7 @@ export default function Home() {
             <section className="section-courseoffline">
                 <div className="container">
                     <p className="top-des">
-                        The readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it
-                        has
-                        a more-or-less normal
+                        Đội ngủ giảng viên và mentor tâm huyết nhiều kinh nghiệm được tích luỹ từ những dự án thực tế sẽ đồng hành cùng bạn xuyên suốt quá trình học và con đường phát triển sự nghiệp.
                     </p>
                     <div className="textbox">
                         <h2 className="main-title">Khóa học Offline</h2>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { PROFILE_PATH_COURSES, PROFILE_PATH_PROJECT } from '../config/path'
 
 export default function Navigator() {
     return (
@@ -14,16 +15,16 @@ export default function Navigator() {
                         <Link to='/' href="#">Trang chủ</Link>
                     </li>
                     <li>
-                        <a href="#">CFD Team</a>
+                        <Link to='/thanh-vien'>CFD Team</Link>
                     </li>
                     <li>
-                        <a href="#">Khóa Học</a>
+                        <Link to={PROFILE_PATH_COURSES}>Khóa Học</Link>
                     </li>
                     <li>
-                        <a href="#">Dự Án</a>
+                        <Link to={PROFILE_PATH_PROJECT}>Dự Án</Link>
                     </li>
                     <li>
-                        <a href="#">Liên hệ</a>
+                        <Link to='/hop-tac'>Liên hệ</Link>
                     </li>
                 </ul>
             </nav>
