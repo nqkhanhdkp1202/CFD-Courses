@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Outlet } from 'react-router-dom'
 import {
     PROFILE_PATH,
@@ -7,11 +8,12 @@ import {
     PROFILE_PATH_PAYMENT,
     PROFILE_PATH_PROJECT
 } from '../config/path'
-import { usePage } from '../hooks/usePage'
 
 
 export default function ProfileLayout() {
-    const { user } = usePage()
+
+    const { user } = useSelector(store => store.auth)
+
     return (
         <main className="profile" id="main">
             <section>

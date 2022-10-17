@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { usePage } from '../hooks/usePage'
 import authServices from '../services/authServices'
 import userServices from '../services/userServices'
@@ -7,11 +8,11 @@ import userServices from '../services/userServices'
 function LoginModal() {
     const [isFetching, setIsFetching] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-    const { isOpenLoginModal,
-        setisOpenLoginModal, isOpenRegister,
-        setIsOpenRegister, user, setUser } = usePage()
+    const { openLogin, openRegister } = useSelector(store => store.page)
     const [formLogin, setFormLogin] = useState({})
     const [formRegister, setFormRegister] = useState({})
+
+    const dispatch = useDispatch();
 
     const onLogin = async () => {
         try {
@@ -19,12 +20,11 @@ function LoginModal() {
             const result = await authServices.login(formLogin)
             if (result.data) {
                 localStorage.setItem('token', JSON.stringify(result.data))
-
                 const user = await userServices.getInfo()
                 if (user.data) {
                     localStorage.setItem('user', JSON.stringify(user.data))
-                    setUser(user.data)
-                    setisOpenLoginModal(false)
+                    dispatch({ type: 'auth/login', payload: user.data })
+                    dispatch({ type: 'page/closeLogin' })
                 }
             }
         }
@@ -40,8 +40,8 @@ function LoginModal() {
         try {
             setIsFetching(true)
             const result = await authServices.register(formRegister)
-            setIsOpenRegister(false)
-            setisOpenLoginModal(true)
+            dispatch({ type: 'page/closeRegister' })
+            dispatch({ type: 'page/openLogin' })
         }
         catch (err) {
             setErrorMessage(err)
@@ -52,9 +52,9 @@ function LoginModal() {
     }
 
     return ReactDOM.createPortal(
-        <div className="popup-form popup-login" style={{ display: isOpenLoginModal || isOpenRegister ? 'flex' : 'none' }}>
+        <div className="popup-form popup-login" style={{ display: openLogin || openRegister ? 'flex' : 'none' }}>
             {
-                isOpenLoginModal ? <div className="wrap">
+                openLogin ? <div className="wrap">
                     {/* login-form */}
                     <div className="ct_login" >
                         <h2 className="title">Đăng nhập</h2>
@@ -82,12 +82,12 @@ function LoginModal() {
                                 Google
                             </div>
                         </div>
-                        <div onClick={() => { setisOpenLoginModal(false) }} className="close">
+                        <div onClick={() => dispatch({ type: 'page/closeLogin' })} className="close">
                             <img src="img/close-icon.png" alt="" />
                         </div>
                     </div>
                     {/* email form */}
-                </div> : isOpenRegister ? <div className="wrap">
+                </div> : openRegister ? <div className="wrap">
                     <h2 className="title">Đăng ký</h2>
                     <div className="tab1">
                         <label>
@@ -110,7 +110,7 @@ function LoginModal() {
                     <p className="policy">
                         Bằng việc đăng kí, bạn đã đồng ý <a href="#">Điều khoản bảo mật</a> của CFD
                     </p>
-                    <div onClick={() => setIsOpenRegister(false)} className="close">
+                    <div onClick={() => dispatch({ type: 'page/closeLogin' })} className="close">
                         <img src="img/close-icon.png" alt="" />
                     </div>
                 </div> : <></>

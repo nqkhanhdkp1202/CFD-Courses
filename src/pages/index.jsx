@@ -98,7 +98,7 @@ export default function Home() {
                 </div>
             </div>
         </section> */}
-            <section className="section-testimonial">
+            {/* <section className="section-testimonial">
                 <div className="container">
                     <div className="textbox">
                         <h2 className="main-title white">Học viên cảm nhận về CFD</h2>
@@ -250,8 +250,8 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-            </section>
-            <section className="section-gallery">
+            </section> */}
+            {/* <section className="section-gallery">
                 <div className="textbox">
                     <h2 className="main-title">Chúng ta là một team</h2>
                 </div>
@@ -279,7 +279,7 @@ export default function Home() {
                     </div>
                     <div className="btn_ctr next" />
                 </div>
-            </section>
+            </section> */}
             <section className="section-action">
                 <div className="container">
                     <h3>Bạn đã sẵn sàng trở thành chiến binh tiếp theo của Team CFD chưa?</h3>

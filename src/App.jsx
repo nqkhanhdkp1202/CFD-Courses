@@ -3,15 +3,19 @@ import {
   useRoutes,
 } from "react-router-dom";
 import MainProvider from './context/MainContext'
-import router from './router'
+import { Provider } from 'react-redux';
+import routers from './routers'
+import store from './store/index'
 
 function App() {
 
-  const element = useRoutes(router)
+  const element = useRoutes(routers)
   return (
     <Suspense fallback={<p>Loading ...</p>}>
       <MainProvider>
-        {element}
+        <Provider store={store}>
+          {element}
+        </Provider>
       </MainProvider>
     </Suspense>
     // <MainProvider>

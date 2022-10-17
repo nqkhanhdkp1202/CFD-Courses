@@ -1,15 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { usePage } from '../../hooks/usePage'
 import userServices from '../../services/userServices'
+import store from '../../store'
 import Coin from './coin'
 import Project from './du-an'
 import MyCourses from './khoa-hoc'
 import Payment from './lich-su-thanh-toan'
 
 export default function Profile() {
-    const { user } = usePage()
+    const { user } = useSelector(store => store.auth)
     const [form, setForm] = useState({})
     const [isFetching, setIsFetching] = useState(false)
     const [error, setErrorMessage] = useState('')

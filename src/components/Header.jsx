@@ -1,37 +1,32 @@
-import React, { useEffect } from 'react'
-import { useContext } from 'react';
-import { useState } from 'react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { PROFILE_PATH, PROFILE_PATH_COURSES } from '../config/path';
-import { MainContext } from '../context/MainContext';
-import { usePage } from '../hooks/usePage';
 import Navigator from './Navigator';
+import store from '../store';
 
 export default function Header() {
 
-    const { isOpenLoginModal,
-        setisOpenLoginModal,
-        isOpenRegister,
-        setIsOpenRegister,
-        user,
-        setUser } = usePage()
+    const { user } = useSelector(store => store.auth)
+    const dispatch = useDispatch()
+    const { openLogin, openRegister } = useSelector(store => store.page)
     const navigate = useNavigate()
+
     function handleLogin(e) {
         e.preventDefault()
-        setisOpenLoginModal(true)
-
+        dispatch({ type: 'page/openLogin' })
     }
 
     function handleRegister(e) {
         e.preventDefault()
-        setIsOpenRegister(true)
+        dispatch({ type: 'page/openRegister' })
     }
 
     function handleLogout(e) {
         e.preventDefault()
         localStorage.removeItem('token')
         localStorage.removeItem('user')
-        setUser(null)
+        dispatch({ type: 'auth/logout' })
         navigate('/')
     }
 

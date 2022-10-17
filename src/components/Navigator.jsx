@@ -12,7 +12,7 @@ export default function Navigator() {
                         <a href="#">Đăng ký</a>
                     </li>
                     <li className="active">
-                        <Link to='/' href="#">Trang chủ</Link>
+                        <Link to='/'>Trang chủ</Link>
                     </li>
                     <li>
                         <Link to='/thanh-vien'>CFD Team</Link>

@@ -6,10 +6,8 @@ export default function Team() {
             <section>
                 <div className="container">
                     <div className="top">
-                        <h2 className="main-title">cfd team</h2>
-                        <p className="top-des">Lorem ipsum dolor sit amet consectetur adipiscing elit. aliquam tincidunt
-                            elementum
-                            sem non luctus
+                        <h2 className="main-title">CFD TEAM</h2>
+                        <p className="top-des">Dạy từ kinh nghiệm, học từ thực tế để tạo ra sản phẩm có giá trị cao
                         </p>
                     </div>
                     <div className="list row">
@@ -20,7 +18,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        trần nghĩa
+                                        Trần Nghĩa
                                     </div>
                                     <p className="title">Founder &amp; Creative Front-End Developer</p>
                                 </div>
@@ -33,7 +31,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        đặng thuyền vương
+                                        Đặng Thuyền Vương
                                     </div>
                                     <p className="title">Co-Founder &amp; Fullstack Developer</p>
                                 </div>
@@ -46,7 +44,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        đặng thuyền quân
+                                        Đặng Thuyền Quân
                                     </div>
                                     <p className="title">Co-Founder &amp; Backend Developer</p>
                                 </div>
@@ -59,7 +57,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        nguyễn đức huy
+                                        Nguyễn Đức Huy
                                     </div>
                                     <p className="title">Co-Founder &amp; Front-End Developer</p>
                                 </div>
@@ -68,12 +66,11 @@ export default function Team() {
                         <div className="item col-md-3 col-sm-4 col-xs-6">
                             <div className="wrap">
                                 <div className="cover">
-                                    <span className="text">H</span>
                                     <img src="img/thumb-member.jpg" alt="" />
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        Diệp anh thy
+                                        Trần Anh Tuấn
                                     </div>
                                     <p className="title">CFD1-Offline</p>
                                 </div>
@@ -86,7 +83,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        huỳnh tiến tài
+                                        Ngô Thành Long
                                     </div>
                                     <p className="title">CFD1-Offline</p>
                                 </div>
@@ -99,7 +96,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        Ngô thành long
+                                        Nguyễn Thành Tùng
                                     </div>
                                     <p className="title">CFD1-Offline</p>
                                 </div>
@@ -112,46 +109,7 @@ export default function Team() {
                                 </div>
                                 <div className="info">
                                     <div className="name">
-                                        trần anh tuấn
-                                    </div>
-                                    <p className="title">CFD1-Offline</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item col-md-3 col-sm-4 col-xs-6">
-                            <div className="wrap">
-                                <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
-                                </div>
-                                <div className="info">
-                                    <div className="name">
-                                        ngô thành long
-                                    </div>
-                                    <p className="title">CFD1-Offline</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item col-md-3 col-sm-4 col-xs-6">
-                            <div className="wrap">
-                                <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
-                                </div>
-                                <div className="info">
-                                    <div className="name">
-                                        nguyễn thành tùng
-                                    </div>
-                                    <p className="title">CFD1-Offline</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item col-md-3 col-sm-4 col-xs-6">
-                            <div className="wrap">
-                                <div className="cover">
-                                    <img src="img/thumb-member.jpg" alt="" />
-                                </div>
-                                <div className="info">
-                                    <div className="name">
-                                        phạm thành trung
+                                        Phạm Thành Trung
                                     </div>
                                     <p className="title">CFD1-Offline</p>
                                 </div>
